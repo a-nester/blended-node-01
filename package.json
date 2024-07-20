@@ -1,20 +1,22 @@
 {
-	"name": "blended-node-01",
-	"version": "1.0.0",
-	"description": "",
-	"main": "src/index.js",
-	"type": "module",
-	"scripts": {
-		"generate": "node src/scripts/generateProducts.js",
-		"get-expensive": "node src/scripts/getExpensesProducts.js",
-		"get-total-price": "node src/scripts/getTotalPrice.js",
-		"get-random-product": "node src/scripts/getRandomProduct.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"@faker-js/faker": "^8.4.1"
-	}
+  "name": "blended-node-01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "generate": "node src/scripts/generateProducts.js",
+    "get-expensive": "node src/scripts/getExpensesProducts.js",
+    "get-total-price": "node src/scripts/getTotalPrice.js",
+    "get-random-product": "node src/scripts/getRandomProduct.js",
+    "create-files": "node src/scripts/createProductFiles.js",
+    "read-folder": "node src/scripts/readeProductFolder.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^8.4.1"
+  }
 }
