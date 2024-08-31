@@ -1,8 +1,7 @@
 import createHttpError from 'http-errors';
-import bcrypt from 'bcrypt';
-import { createUser, findUserByEmail, setupSession } from '../services/auth.js';
-import e from 'express';
-import { setupCookie } from '../utils/setupCookie.js';
+// import bcrypt from 'bcrypt';
+import { createUser, findUserByEmail } from '../services/auth.js'; //createUser,  setupSession
+// import { setupCookie } from '../utils/setupCookie.js';
 
 export const registerUserController = async (req, res) => {
   const { name, email } = req.body;
@@ -12,41 +11,37 @@ export const registerUserController = async (req, res) => {
     throw createHttpError(409, 'Email in use');
   }
 
-  await createUser(req.body);
-
+  const createdUser = await createUser(req.body);
+  console.log('createdUser >> ', createdUser);
   res.status(201).json({
-    status: 201,
-    message: 'Successful user registered!',
-    data: {
-      name,
-      email,
-    },
+    user: { name: createdUser.name, email: createdUser.email },
+    token: createdUser.token,
   });
 };
 
-export const loginUserController = async (req, res) => {
-  const { email, password } = req.body;
-  const user = await findUserByEmail(email);
+// export const loginUserController = async (req, res) => {
+//   const { email, password } = req.body;
+//   const user = await findUserByEmail(email);
 
-  if (!user) {
-    throw createHttpError(401, 'User not authorized!');
-  }
+//   if (!user) {
+//     throw createHttpError(401, 'User not authorized!');
+//   }
 
-  const isEqual = bcrypt.compare(password, user.password);
+//   const isEqual = bcrypt.compare(password, user.password);
 
-  if (!isEqual) {
-    throw createHttpError(401, 'User not authorized!');
-  }
+//   if (!isEqual) {
+//     throw createHttpError(401, 'User not authorized!');
+//   }
 
-  const session = await setupSession(user._id);
+//   const session = await setupSession(user._id);
 
-  setupCookie(res, session);
+//   setupCookie(res, session);
 
-  res.status(200).json({
-    status: 200,
-    message: 'Successful logged in!',
-    data: {
-      accessToken: session.accessToken,
-    },
-  });
-};
+//   res.status(200).json({
+//     status: 200,
+//     message: 'Successful logged in!',
+//     data: {
+//       accessToken: session.accessToken,
+//     },
+//   });
+// };
