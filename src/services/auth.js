@@ -23,6 +23,12 @@ export const createUser = async (userData) => {
   return updateUserWithToken(user._id);
 };
 
+export const findUserById = (id) => User.findById(id);
+
+export const resetToken = (id) => {
+  User.findByIdAndUpdate(id, { token: '' });
+};
+
 // export const setupSession = async (userId) => {
 //   await Session.deleteOne({ userId });
 //   return Session.create({ userId, ...createSession() });
